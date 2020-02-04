@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --colorOne: #2D5F73;
+            --colorTwo: #8C6C5A;
+            --colorThree: #BFD9D4;
+            --colorFour: #40271E;
+            --unit: 10px;
+        }
+
+        body {
+            background-color: var(--colorThree);
+
+        }
+
+        .wrap {
+            display: flex;
+            flex-direction: column;
+            max-width: 800px;
+            min-height: 100vh;
+            justify-content: center;
+            margin: 0 auto;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+        }
+
+        .cardsBox {
+            display: flex;
+            width: 100%;
+            padding: 30px 10px;
+            justify-content: space-between;
+        }
+
+        .btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 1px;
+            background-color: var(--colorOne);
+            color: var(--colorThree);
+            border-radius: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: .3s;
+        }
+
+        .btn:hover {
+            background-color: var(--colorOne);
+            color: var(--colorFour);
+
+        }
+
+        .result {
+            display: flex;
+            width: 100%;
+            padding: 30px 10px;
+            color: var(--colorFour);
+        }
+
+        .currentResult {
+            flex-basis: 30%;
+            padding-left: 10px;
+            border-left: 1px solid var(--colorFour);
+            text-align: center;
+
+
+        }
+
+        .totalResult {
+            flex-grow: 1;
+            padding-left: 10px;
+            border-left: 1px solid var(--colorFour);
+            border-right: 1px solid var(--colorFour);
+            text-align: center;
+
+        }
+
+        div.cards {
+            box-sizing: border-box;
+            width: 180px;
+            height: 320px;
+            overflow: hidden;
+            border: 10px solid var(--colorOne);
+            border-radius: 10px;
+            transform: scale(1);
+            transition: .2s;
+        }
+
+        div.rotateCards {
+            transform: rotateY(180deg);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            border: none;
+        }
+
+        .pixel {
+            width: var(--unit);
+            height: var(--unit);
+            font-size: var(--unit);
+            background: var(--colorOne);
+
+            box-shadow:
+                0 0 var(--colorOne),
+                calc(1*var(--unit)) 0 var(--colorTwo),
+                calc(2*var(--unit)) 0 var(--colorOne),
+                calc(3*var(--unit)) 0 var(--colorTwo),
+                calc(4*var(--unit)) 0 var(--colorOne),
+                calc(5*var(--unit)) 0 var(--colorTwo),
+                calc(6*var(--unit)) 0 var(--colorOne),
+                calc(7*var(--unit)) 0 var(--colorTwo),
+                calc(8*var(--unit)) 0 var(--colorOne),
+                calc(9*var(--unit)) 0 var(--colorTwo),
+                calc(10*var(--unit)) 0 var(--colorOne),
+                calc(11*var(--unit)) 0 var(--colorTwo),
+                calc(12*var(--unit)) 0 var(--colorOne),
+                calc(13*var(--unit)) 0 var(--colorTwo),
+                calc(14*var(--unit)) 0 var(--colorOne),
+                calc(15*var(--unit)) 0 var(--colorTwo),
+                calc(16*var(--unit)) 0 var(--colorOne),
+                calc(17*var(--unit)) 0 var(--colorTwo),
+
+
+                0 calc(1*var(--unit)) var(--colorTwo),
+                calc(1*var(--unit)) calc(1*var(--unit)) var(--colorOne),
+                calc(2*var(--unit)) calc(1*var(--unit)) var(--colorTwo),
+                calc(3*var(--unit)) calc(1*var(--unit)) var(--colorOne),
+                calc(4*var(--unit)) calc(1*var(--unit)) var(--colorTwo),
+                calc(5*var(--unit)) calc(1*var(--unit)) var(--colorOne),
+                calc(6*var(--unit)) calc(1*var(--unit)) var(--colorTwo),
+                calc(7*var(--unit)) calc(1*var(--unit)) var(--colorOne),
+                calc(8*var(--unit)) calc(1*var(--unit)) var(--colorTwo),
+                calc(9*var(--unit)) calc(1*var(--unit)) var(--colorOne),
+                calc(10*var(--unit)) calc(1*var(--unit)) var(--colorTwo),
+                calc(11*var(--unit)) calc(1*var(--unit)) var(--colorOne),
+                calc(12*var(--unit)) calc(1*var(--unit)) var(--colorTwo),
+                calc(13*var(--unit)) calc(1*var(--unit)) var(--colorOne),
+                calc(14*var(--unit)) calc(1*var(--unit)) var(--colorTwo),
+                calc(15*var(--unit)) calc(1*var(--unit)) var(--colorOne),
+                calc(16*var(--unit)) calc(1*var(--unit)) var(--colorTwo),
+                calc(17*var(--unit)) calc(1*var(--unit)) var(--colorOne),
+
+                0 calc(2*var(--unit)) var(--colorOne),
+                calc(1*var(--unit)) calc(2*var(--unit)) var(--colorTwo),
+                calc(2*var(--unit)) calc(2*var(--unit)) var(--colorOne),
+                calc(3*var(--unit)) calc(2*var(--unit)) var(--colorTwo),
+                calc(4*var(--unit)) calc(2*var(--unit)) var(--colorOne),
+                calc(5*var(--unit)) calc(2*var(--unit)) var(--colorTwo),
+                calc(6*var(--unit)) calc(2*var(--unit)) var(--colorOne),
+                calc(7*var(--unit)) calc(2*var(--unit)) var(--colorTwo),
+                calc(8*var(--unit)) calc(2*var(--unit)) var(--colorOne),
+                calc(9*var(--unit)) calc(2*var(--unit)) var(--colorTwo),
+                calc(10*var(--unit)) calc(2*var(--unit)) var(--colorOne),
+                calc(11*var(--unit)) calc(2*var(--unit)) var(--colorTwo),
+                calc(12*var(--unit)) calc(2*var(--unit)) var(--colorOne),
+                calc(13*var(--unit)) calc(2*var(--unit)) var(--colorTwo),
+                calc(14*var(--unit)) calc(2*var(--unit)) var(--colorOne),
+                calc(15*var(--unit)) calc(2*var(--unit)) var(--colorTwo),
+                calc(16*var(--unit)) calc(2*var(--unit)) var(--colorOne),
+                calc(17*var(--unit)) calc(2*var(--unit)) var(--colorTwo),
+
+                0 calc(3*var(--unit)) var(--colorTwo),
+                calc(1*var(--unit)) calc(3*var(--unit)) var(--colorOne),
+                calc(2*var(--unit)) calc(3*var(--unit)) var(--colorTwo),
+                calc(3*var(--unit)) calc(3*var(--unit)) var(--colorOne),
+                calc(4*var(--unit)) calc(3*var(--unit)) var(--colorTwo),
+                calc(5*var(--unit)) calc(3*var(--unit)) var(--colorOne),
+                calc(6*var(--unit)) calc(3*var(--unit)) var(--colorTwo),
+                calc(7*var(--unit)) calc(3*var(--unit)) var(--colorOne),
+                calc(8*var(--unit)) calc(3*var(--unit)) var(--colorTwo),
+                calc(9*var(--unit)) calc(3*var(--unit)) var(--colorOne),
+                calc(10*var(--unit)) calc(3*var(--unit)) var(--colorTwo),
+                calc(11*var(--unit)) calc(3*var(--unit)) var(--colorOne),
+                calc(12*var(--unit)) calc(3*var(--unit)) var(--colorTwo),
+                calc(13*var(--unit)) calc(3*var(--unit)) var(--colorOne),
+                calc(14*var(--unit)) calc(3*var(--unit)) var(--colorTwo),
+                calc(15*var(--unit)) calc(3*var(--unit)) var(--colorOne),
+                calc(16*var(--unit)) calc(3*var(--unit)) var(--colorTwo),
+                calc(17*var(--unit)) calc(3*var(--unit)) var(--colorOne),
+
+                0 calc(4*var(--unit)) var(--colorOne),
+                calc(1*var(--unit)) calc(4*var(--unit)) var(--colorTwo),
+                calc(2*var(--unit)) calc(4*var(--unit)) var(--colorOne),
+                calc(3*var(--unit)) calc(4*var(--unit)) var(--colorTwo),
+                calc(4*var(--unit)) calc(4*var(--unit)) var(--colorOne),
+                calc(5*var(--unit)) calc(4*var(--unit)) var(--colorTwo),
+                calc(6*var(--unit)) calc(4*var(--unit)) var(--colorOne),
+                calc(7*var(--unit)) calc(4*var(--unit)) var(--colorTwo),
+                calc(8*var(--unit)) calc(4*var(--unit)) var(--colorOne),
+                calc(9*var(--unit)) calc(4*var(--unit)) var(--colorTwo),
+                calc(10*var(--unit)) calc(4*var(--unit)) var(--colorOne),
+                calc(11*var(--unit)) calc(4*var(--unit)) var(--colorTwo),
+                calc(12*var(--unit)) calc(4*var(--unit)) var(--colorOne),
+                calc(13*var(--unit)) calc(4*var(--unit)) var(--colorTwo),
+                calc(14*var(--unit)) calc(4*var(--unit)) var(--colorOne),
+                calc(15*var(--unit)) calc(4*var(--unit)) var(--colorTwo),
+                calc(16*var(--unit)) calc(4*var(--unit)) var(--colorOne),
+                calc(17*var(--unit)) calc(4*var(--unit)) var(--colorTwo),
+
+                0 calc(5*var(--unit)) var(--colorTwo),
+                calc(1*var(--unit)) calc(5*var(--unit)) var(--colorOne),
+                calc(2*var(--unit)) calc(5*var(--unit)) var(--colorTwo),
+                calc(3*var(--unit)) calc(5*var(--unit)) var(--colorOne),
+                calc(4*var(--unit)) calc(5*var(--unit)) var(--colorTwo),
+                calc(5*var(--unit)) calc(5*var(--unit)) var(--colorOne),
+                calc(6*var(--unit)) calc(5*var(--unit)) var(--colorTwo),
+                calc(7*var(--unit)) calc(5*var(--unit)) var(--colorOne),
+                calc(8*var(--unit)) calc(5*var(--unit)) var(--colorTwo),
+                calc(9*var(--unit)) calc(5*var(--unit)) var(--colorOne),
+                calc(10*var(--unit)) calc(5*var(--unit)) var(--colorTwo),
+                calc(11*var(--unit)) calc(5*var(--unit)) var(--colorOne),
+                calc(12*var(--unit)) calc(5*var(--unit)) var(--colorTwo),
+                calc(13*var(--unit)) calc(5*var(--unit)) var(--colorOne),
+                calc(14*var(--unit)) calc(5*var(--unit)) var(--colorTwo),
+                calc(15*var(--unit)) calc(5*var(--unit)) var(--colorOne),
+                calc(16*var(--unit)) calc(5*var(--unit)) var(--colorTwo),
+                calc(17*var(--unit)) calc(5*var(--unit)) var(--colorOne),
+
+                0 calc(6*var(--unit)) var(--colorOne),
+                calc(1*var(--unit)) calc(6*var(--unit)) var(--colorTwo),
+                calc(2*var(--unit)) calc(6*var(--unit)) var(--colorOne),
+                calc(3*var(--unit)) calc(6*var(--unit)) var(--colorTwo),
+                calc(4*var(--unit)) calc(6*var(--unit)) var(--colorOne),
+                calc(5*var(--unit)) calc(6*var(--unit)) var(--colorTwo),
+                calc(6*var(--unit)) calc(6*var(--unit)) var(--colorOne),
+                calc(7*var(--unit)) calc(6*var(--unit)) var(--colorTwo),
+                calc(8*var(--unit)) calc(6*var(--unit)) var(--colorOne),
+                calc(9*var(--unit)) calc(6*var(--unit)) var(--colorTwo),
+                calc(10*var(--unit)) calc(6*var(--unit)) var(--colorOne),
+                calc(11*var(--unit)) calc(6*var(--unit)) var(--colorTwo),
+                calc(12*var(--unit)) calc(6*var(--unit)) var(--colorOne),
+                calc(13*var(--unit)) calc(6*var(--unit)) var(--colorTwo),
+                calc(14*var(--unit)) calc(6*var(--unit)) var(--colorOne),
+                calc(15*var(--unit)) calc(6*var(--unit)) var(--colorTwo),
+                calc(16*var(--unit)) calc(6*var(--unit)) var(--colorOne),
+                calc(17*var(--unit)) calc(6*var(--unit)) var(--colorTwo),
+
+                0 calc(7*var(--unit)) var(--colorTwo),
+                calc(1*var(--unit)) calc(7*var(--unit)) var(--colorOne),
+                calc(2*var(--unit)) calc(7*var(--unit)) var(--colorTwo),
+                calc(3*var(--unit)) calc(7*var(--unit)) var(--colorOne),
+                calc(4*var(--unit)) calc(7*var(--unit)) var(--colorTwo),
+                calc(5*var(--unit)) calc(7*var(--unit)) var(--colorOne),
+                calc(6*var(--unit)) calc(7*var(--unit)) var(--colorTwo),
+                calc(7*var(--unit)) calc(7*var(--unit)) var(--colorOne),
+                calc(8*var(--unit)) calc(7*var(--unit)) var(--colorTwo),
+                calc(9*var(--unit)) calc(7*var(--unit)) var(--colorOne),
+                calc(10*var(--unit)) calc(7*var(--unit)) var(--colorTwo),
+                calc(11*var(--unit)) calc(7*var(--unit)) var(--colorOne),
+                calc(12*var(--unit)) calc(7*var(--unit)) var(--colorTwo),
+                calc(13*var(--unit)) calc(7*var(--unit)) var(--colorOne),
+                calc(14*var(--unit)) calc(7*var(--unit)) var(--colorTwo),
+                calc(15*var(--unit)) calc(7*var(--unit)) var(--colorOne),
+                calc(16*var(--unit)) calc(7*var(--unit)) var(--colorTwo),
+                calc(17*var(--unit)) calc(7*var(--unit)) var(--colorOne),
+
+                0 calc(8*var(--unit)) var(--colorOne),
+                calc(1*var(--unit)) calc(8*var(--unit)) var(--colorTwo),
+                calc(2*var(--unit)) calc(8*var(--unit)) var(--colorOne),
+                calc(3*var(--unit)) calc(8*var(--unit)) var(--colorTwo),
+                calc(4*var(--unit)) calc(8*var(--unit)) var(--colorOne),
+                calc(5*var(--unit)) calc(8*var(--unit)) var(--colorTwo),
+                calc(6*var(--unit)) calc(8*var(--unit)) var(--colorOne),
+                calc(7*var(--unit)) calc(8*var(--unit)) var(--colorTwo),
+                calc(8*var(--unit)) calc(8*var(--unit)) var(--colorOne),
+                calc(9*var(--unit)) calc(8*var(--unit)) var(--colorTwo),
+                calc(10*var(--unit)) calc(8*var(--unit)) var(--colorOne),
+                calc(11*var(--unit)) calc(8*var(--unit)) var(--colorTwo),
+                calc(12*var(--unit)) calc(8*var(--unit)) var(--colorOne),
+                calc(13*var(--unit)) calc(8*var(--unit)) var(--colorTwo),
+                calc(14*var(--unit)) calc(8*var(--unit)) var(--colorOne),
+                calc(15*var(--unit)) calc(8*var(--unit)) var(--colorTwo),
+                calc(16*var(--unit)) calc(8*var(--unit)) var(--colorOne),
+                calc(17*var(--unit)) calc(8*var(--unit)) var(--colorTwo),
+
+                0 calc(9*var(--unit)) var(--colorTwo),
+                calc(1*var(--unit)) calc(9*var(--unit)) var(--colorOne),
+                calc(2*var(--unit)) calc(9*var(--unit)) var(--colorTwo),
+                calc(3*var(--unit)) calc(9*var(--unit)) var(--colorOne),
+                calc(4*var(--unit)) calc(9*var(--unit)) var(--colorTwo),
+                calc(5*var(--unit)) calc(9*var(--unit)) var(--colorOne),
+                calc(6*var(--unit)) calc(9*var(--unit)) var(--colorTwo),
+                calc(7*var(--unit)) calc(9*var(--unit)) var(--colorOne),
+                calc(8*var(--unit)) calc(9*var(--unit)) var(--colorTwo),
+                calc(9*var(--unit)) calc(9*var(--unit)) var(--colorOne),
+                calc(10*var(--unit)) calc(9*var(--unit)) var(--colorTwo),
+                calc(11*var(--unit)) calc(9*var(--unit)) var(--colorOne),
+                calc(12*var(--unit)) calc(9*var(--unit)) var(--colorTwo),
+                calc(13*var(--unit)) calc(9*var(--unit)) var(--colorOne),
+                calc(14*var(--unit)) calc(9*var(--unit)) var(--colorTwo),
+                calc(15*var(--unit)) calc(9*var(--unit)) var(--colorOne),
+                calc(16*var(--unit)) calc(9*var(--unit)) var(--colorTwo),
+                calc(17*var(--unit)) calc(9*var(--unit)) var(--colorOne),
+
+                0 calc(10*var(--unit)) var(--colorOne),
+                calc(1*var(--unit)) calc(10*var(--unit)) var(--colorTwo),
+                calc(2*var(--unit)) calc(10*var(--unit)) var(--colorOne),
+                calc(3*var(--unit)) calc(10*var(--unit)) var(--colorTwo),
+                calc(4*var(--unit)) calc(10*var(--unit)) var(--colorOne),
+                calc(5*var(--unit)) calc(10*var(--unit)) var(--colorTwo),
+                calc(6*var(--unit)) calc(10*var(--unit)) var(--colorOne),
+                calc(7*var(--unit)) calc(10*var(--unit)) var(--colorTwo),
+                calc(8*var(--unit)) calc(10*var(--unit)) var(--colorOne),
+                calc(9*var(--unit)) calc(10*var(--unit)) var(--colorTwo),
+                calc(10*var(--unit)) calc(10*var(--unit)) var(--colorOne),
+                calc(11*var(--unit)) calc(10*var(--unit)) var(--colorTwo),
+                calc(12*var(--unit)) calc(10*var(--unit)) var(--colorOne),
+                calc(13*var(--unit)) calc(10*var(--unit)) var(--colorTwo),
+                calc(14*var(--unit)) calc(10*var(--unit)) var(--colorOne),
+                calc(15*var(--unit)) calc(10*var(--unit)) var(--colorTwo),
+                calc(16*var(--unit)) calc(10*var(--unit)) var(--colorOne),
+                calc(17*var(--unit)) calc(10*var(--unit)) var(--colorTwo),
+
+                0 calc(11*var(--unit)) var(--colorTwo),
+                calc(1*var(--unit)) calc(11*var(--unit)) var(--colorOne),
+                calc(2*var(--unit)) calc(11*var(--unit)) var(--colorTwo),
+                calc(3*var(--unit)) calc(11*var(--unit)) var(--colorOne),
+                calc(4*var(--unit)) calc(11*var(--unit)) var(--colorTwo),
+                calc(5*var(--unit)) calc(11*var(--unit)) var(--colorOne),
+                calc(6*var(--unit)) calc(11*var(--unit)) var(--colorTwo),
+                calc(7*var(--unit)) calc(11*var(--unit)) var(--colorOne),
+                calc(8*var(--unit)) calc(11*var(--unit)) var(--colorTwo),
+                calc(9*var(--unit)) calc(11*var(--unit)) var(--colorOne),
+                calc(10*var(--unit)) calc(11*var(--unit)) var(--colorTwo),
+                calc(11*var(--unit)) calc(11*var(--unit)) var(--colorOne),
+                calc(12*var(--unit)) calc(11*var(--unit)) var(--colorTwo),
+                calc(13*var(--unit)) calc(11*var(--unit)) var(--colorOne),
+                calc(14*var(--unit)) calc(11*var(--unit)) var(--colorTwo),
+                calc(15*var(--unit)) calc(11*var(--unit)) var(--colorOne),
+                calc(16*var(--unit)) calc(11*var(--unit)) var(--colorTwo),
+                calc(17*var(--unit)) calc(11*var(--unit)) var(--colorOne),
+
+                0 calc(12*var(--unit)) var(--colorOne),
+                calc(1*var(--unit)) calc(12*var(--unit)) var(--colorTwo),
+                calc(2*var(--unit)) calc(12*var(--unit)) var(--colorOne),
+                calc(3*var(--unit)) calc(12*var(--unit)) var(--colorTwo),
+                calc(4*var(--unit)) calc(12*var(--unit)) var(--colorOne),
+                calc(5*var(--unit)) calc(12*var(--unit)) var(--colorTwo),
+                calc(6*var(--unit)) calc(12*var(--unit)) var(--colorOne),
+                calc(7*var(--unit)) calc(12*var(--unit)) var(--colorTwo),
+                calc(8*var(--unit)) calc(12*var(--unit)) var(--colorOne),
+                calc(9*var(--unit)) calc(12*var(--unit)) var(--colorTwo),
+                calc(10*var(--unit)) calc(12*var(--unit)) var(--colorOne),
+                calc(11*var(--unit)) calc(12*var(--unit)) var(--colorTwo),
+                calc(12*var(--unit)) calc(12*var(--unit)) var(--colorOne),
+                calc(13*var(--unit)) calc(12*var(--unit)) var(--colorTwo),
+                calc(14*var(--unit)) calc(12*var(--unit)) var(--colorOne),
+                calc(15*var(--unit)) calc(12*var(--unit)) var(--colorTwo),
+                calc(16*var(--unit)) calc(12*var(--unit)) var(--colorOne),
+                calc(17*var(--unit)) calc(12*var(--unit)) var(--colorTwo),
+
+                0 calc(13*var(--unit)) var(--colorTwo),
+                calc(1*var(--unit)) calc(13*var(--unit)) var(--colorOne),
+                calc(2*var(--unit)) calc(13*var(--unit)) var(--colorTwo),
+                calc(3*var(--unit)) calc(13*var(--unit)) var(--colorOne),
+                calc(4*var(--unit)) calc(13*var(--unit)) var(--colorTwo),
+                calc(5*var(--unit)) calc(13*var(--unit)) var(--colorOne),
+                calc(6*var(--unit)) calc(13*var(--unit)) var(--colorTwo),
+                calc(7*var(--unit)) calc(13*var(--unit)) var(--colorOne),
+                calc(8*var(--unit)) calc(13*var(--unit)) var(--colorTwo),
+                calc(9*var(--unit)) calc(13*var(--unit)) var(--colorOne),
+                calc(10*var(--unit)) calc(13*var(--unit)) var(--colorTwo),
+                calc(11*var(--unit)) calc(13*var(--unit)) var(--colorOne),
+                calc(12*var(--unit)) calc(13*var(--unit)) var(--colorTwo),
+                calc(13*var(--unit)) calc(13*var(--unit)) var(--colorOne),
+                calc(14*var(--unit)) calc(13*var(--unit)) var(--colorTwo),
+                calc(15*var(--unit)) calc(13*var(--unit)) var(--colorOne),
+                calc(16*var(--unit)) calc(13*var(--unit)) var(--colorTwo),
+                calc(17*var(--unit)) calc(13*var(--unit)) var(--colorOne),
+
+                0 calc(14*var(--unit)) var(--colorOne),
+                calc(1*var(--unit)) calc(14*var(--unit)) var(--colorTwo),
+                calc(2*var(--unit)) calc(14*var(--unit)) var(--colorOne),
+                calc(3*var(--unit)) calc(14*var(--unit)) var(--colorTwo),
+                calc(4*var(--unit)) calc(14*var(--unit)) var(--colorOne),
+                calc(5*var(--unit)) calc(14*var(--unit)) var(--colorTwo),
+                calc(6*var(--unit)) calc(14*var(--unit)) var(--colorOne),
+                calc(7*var(--unit)) calc(14*var(--unit)) var(--colorTwo),
+                calc(8*var(--unit)) calc(14*var(--unit)) var(--colorOne),
+                calc(9*var(--unit)) calc(14*var(--unit)) var(--colorTwo),
+                calc(10*var(--unit)) calc(14*var(--unit)) var(--colorOne),
+                calc(11*var(--unit)) calc(14*var(--unit)) var(--colorTwo),
+                calc(12*var(--unit)) calc(14*var(--unit)) var(--colorOne),
+                calc(13*var(--unit)) calc(14*var(--unit)) var(--colorTwo),
+                calc(14*var(--unit)) calc(14*var(--unit)) var(--colorOne),
+                calc(15*var(--unit)) calc(14*var(--unit)) var(--colorTwo),
+                calc(16*var(--unit)) calc(14*var(--unit)) var(--colorOne),
+                calc(17*var(--unit)) calc(14*var(--unit)) var(--colorTwo),
+
+                0 calc(15*var(--unit)) var(--colorTwo),
+                calc(1*var(--unit)) calc(15*var(--unit)) var(--colorOne),
+                calc(2*var(--unit)) calc(15*var(--unit)) var(--colorTwo),
+                calc(3*var(--unit)) calc(15*var(--unit)) var(--colorOne),
+                calc(4*var(--unit)) calc(15*var(--unit)) var(--colorTwo),
+                calc(5*var(--unit)) calc(15*var(--unit)) var(--colorOne),
+                calc(6*var(--unit)) calc(15*var(--unit)) var(--colorTwo),
+                calc(7*var(--unit)) calc(15*var(--unit)) var(--colorOne),
+                calc(8*var(--unit)) calc(15*var(--unit)) var(--colorTwo),
+                calc(9*var(--unit)) calc(15*var(--unit)) var(--colorOne),
+                calc(10*var(--unit)) calc(15*var(--unit)) var(--colorTwo),
+                calc(11*var(--unit)) calc(15*var(--unit)) var(--colorOne),
+                calc(12*var(--unit)) calc(15*var(--unit)) var(--colorTwo),
+                calc(13*var(--unit)) calc(15*var(--unit)) var(--colorOne),
+                calc(14*var(--unit)) calc(15*var(--unit)) var(--colorTwo),
+                calc(15*var(--unit)) calc(15*var(--unit)) var(--colorOne),
+                calc(16*var(--unit)) calc(15*var(--unit)) var(--colorTwo),
+                calc(17*var(--unit)) calc(15*var(--unit)) var(--colorOne),
+
+                0 calc(16*var(--unit)) var(--colorOne),
+                calc(1*var(--unit)) calc(16*var(--unit)) var(--colorTwo),
+                calc(2*var(--unit)) calc(16*var(--unit)) var(--colorOne),
+                calc(3*var(--unit)) calc(16*var(--unit)) var(--colorTwo),
+                calc(4*var(--unit)) calc(16*var(--unit)) var(--colorOne),
+                calc(5*var(--unit)) calc(16*var(--unit)) var(--colorTwo),
+                calc(6*var(--unit)) calc(16*var(--unit)) var(--colorOne),
+                calc(7*var(--unit)) calc(16*var(--unit)) var(--colorTwo),
+                calc(8*var(--unit)) calc(16*var(--unit)) var(--colorOne),
+                calc(9*var(--unit)) calc(16*var(--unit)) var(--colorTwo),
+                calc(10*var(--unit)) calc(16*var(--unit)) var(--colorOne),
+                calc(11*var(--unit)) calc(16*var(--unit)) var(--colorTwo),
+                calc(12*var(--unit)) calc(16*var(--unit)) var(--colorOne),
+                calc(13*var(--unit)) calc(16*var(--unit)) var(--colorTwo),
+                calc(14*var(--unit)) calc(16*var(--unit)) var(--colorOne),
+                calc(15*var(--unit)) calc(16*var(--unit)) var(--colorTwo),
+                calc(16*var(--unit)) calc(16*var(--unit)) var(--colorOne),
+                calc(17*var(--unit)) calc(16*var(--unit)) var(--colorTwo),
+
+                0 calc(17*var(--unit)) var(--colorTwo),
+                calc(1*var(--unit)) calc(17*var(--unit)) var(--colorOne),
+                calc(2*var(--unit)) calc(17*var(--unit)) var(--colorTwo),
+                calc(3*var(--unit)) calc(17*var(--unit)) var(--colorOne),
+                calc(4*var(--unit)) calc(17*var(--unit)) var(--colorTwo),
+                calc(5*var(--unit)) calc(17*var(--unit)) var(--colorOne),
+                calc(6*var(--unit)) calc(17*var(--unit)) var(--colorTwo),
+                calc(7*var(--unit)) calc(17*var(--unit)) var(--colorOne),
+                calc(8*var(--unit)) calc(17*var(--unit)) var(--colorTwo),
+                calc(9*var(--unit)) calc(17*var(--unit)) var(--colorOne),
+                calc(10*var(--unit)) calc(17*var(--unit)) var(--colorTwo),
+                calc(11*var(--unit)) calc(17*var(--unit)) var(--colorOne),
+                calc(12*var(--unit)) calc(17*var(--unit)) var(--colorTwo),
+                calc(13*var(--unit)) calc(17*var(--unit)) var(--colorOne),
+                calc(14*var(--unit)) calc(17*var(--unit)) var(--colorTwo),
+                calc(15*var(--unit)) calc(17*var(--unit)) var(--colorOne),
+                calc(16*var(--unit)) calc(17*var(--unit)) var(--colorTwo),
+                calc(17*var(--unit)) calc(17*var(--unit)) var(--colorOne),
+
+                0 calc(18*var(--unit)) var(--colorOne),
+                calc(1*var(--unit)) calc(18*var(--unit)) var(--colorTwo),
+                calc(2*var(--unit)) calc(18*var(--unit)) var(--colorOne),
+                calc(3*var(--unit)) calc(18*var(--unit)) var(--colorTwo),
+                calc(4*var(--unit)) calc(18*var(--unit)) var(--colorOne),
+                calc(5*var(--unit)) calc(18*var(--unit)) var(--colorTwo),
+                calc(6*var(--unit)) calc(18*var(--unit)) var(--colorOne),
+                calc(7*var(--unit)) calc(18*var(--unit)) var(--colorTwo),
+                calc(8*var(--unit)) calc(18*var(--unit)) var(--colorOne),
+                calc(9*var(--unit)) calc(18*var(--unit)) var(--colorTwo),
+                calc(10*var(--unit)) calc(18*var(--unit)) var(--colorOne),
+                calc(11*var(--unit)) calc(18*var(--unit)) var(--colorTwo),
+                calc(12*var(--unit)) calc(18*var(--unit)) var(--colorOne),
+                calc(13*var(--unit)) calc(18*var(--unit)) var(--colorTwo),
+                calc(14*var(--unit)) calc(18*var(--unit)) var(--colorOne),
+                calc(15*var(--unit)) calc(18*var(--unit)) var(--colorTwo),
+                calc(16*var(--unit)) calc(18*var(--unit)) var(--colorOne),
+                calc(17*var(--unit)) calc(18*var(--unit)) var(--colorTwo),
+
+                0 calc(19*var(--unit)) var(--colorTwo),
+                calc(1*var(--unit)) calc(19*var(--unit)) var(--colorOne),
+                calc(2*var(--unit)) calc(19*var(--unit)) var(--colorTwo),
+                calc(3*var(--unit)) calc(19*var(--unit)) var(--colorOne),
+                calc(4*var(--unit)) calc(19*var(--unit)) var(--colorTwo),
+                calc(5*var(--unit)) calc(19*var(--unit)) var(--colorOne),
+                calc(6*var(--unit)) calc(19*var(--unit)) var(--colorTwo),
+                calc(7*var(--unit)) calc(19*var(--unit)) var(--colorOne),
+                calc(8*var(--unit)) calc(19*var(--unit)) var(--colorTwo),
+                calc(9*var(--unit)) calc(19*var(--unit)) var(--colorOne),
+                calc(10*var(--unit)) calc(19*var(--unit)) var(--colorTwo),
+                calc(11*var(--unit)) calc(19*var(--unit)) var(--colorOne),
+                calc(12*var(--unit)) calc(19*var(--unit)) var(--colorTwo),
+                calc(13*var(--unit)) calc(19*var(--unit)) var(--colorOne),
+                calc(14*var(--unit)) calc(19*var(--unit)) var(--colorTwo),
+                calc(15*var(--unit)) calc(19*var(--unit)) var(--colorOne),
+                calc(16*var(--unit)) calc(19*var(--unit)) var(--colorTwo),
+                calc(17*var(--unit)) calc(19*var(--unit)) var(--colorOne),
+
+                0 calc(20*var(--unit)) var(--colorOne),
+                calc(1*var(--unit)) calc(20*var(--unit)) var(--colorTwo),
+                calc(2*var(--unit)) calc(20*var(--unit)) var(--colorOne),
+                calc(3*var(--unit)) calc(20*var(--unit)) var(--colorTwo),
+                calc(4*var(--unit)) calc(20*var(--unit)) var(--colorOne),
+                calc(5*var(--unit)) calc(20*var(--unit)) var(--colorTwo),
+                calc(6*var(--unit)) calc(20*var(--unit)) var(--colorOne),
+                calc(7*var(--unit)) calc(20*var(--unit)) var(--colorTwo),
+                calc(8*var(--unit)) calc(20*var(--unit)) var(--colorOne),
+                calc(9*var(--unit)) calc(20*var(--unit)) var(--colorTwo),
+                calc(10*var(--unit)) calc(20*var(--unit)) var(--colorOne),
+                calc(11*var(--unit)) calc(20*var(--unit)) var(--colorTwo),
+                calc(12*var(--unit)) calc(20*var(--unit)) var(--colorOne),
+                calc(13*var(--unit)) calc(20*var(--unit)) var(--colorTwo),
+                calc(14*var(--unit)) calc(20*var(--unit)) var(--colorOne),
+                calc(15*var(--unit)) calc(20*var(--unit)) var(--colorTwo),
+                calc(16*var(--unit)) calc(20*var(--unit)) var(--colorOne),
+                calc(17*var(--unit)) calc(20*var(--unit)) var(--colorTwo),
+
+                0 calc(21*var(--unit)) var(--colorTwo),
+                calc(1*var(--unit)) calc(21*var(--unit)) var(--colorOne),
+                calc(2*var(--unit)) calc(21*var(--unit)) var(--colorTwo),
+                calc(3*var(--unit)) calc(21*var(--unit)) var(--colorOne),
+                calc(4*var(--unit)) calc(21*var(--unit)) var(--colorTwo),
+                calc(5*var(--unit)) calc(21*var(--unit)) var(--colorOne),
+                calc(6*var(--unit)) calc(21*var(--unit)) var(--colorTwo),
+                calc(7*var(--unit)) calc(21*var(--unit)) var(--colorOne),
+                calc(8*var(--unit)) calc(21*var(--unit)) var(--colorTwo),
+                calc(9*var(--unit)) calc(21*var(--unit)) var(--colorOne),
+                calc(10*var(--unit)) calc(21*var(--unit)) var(--colorTwo),
+                calc(11*var(--unit)) calc(21*var(--unit)) var(--colorOne),
+                calc(12*var(--unit)) calc(21*var(--unit)) var(--colorTwo),
+                calc(13*var(--unit)) calc(21*var(--unit)) var(--colorOne),
+                calc(14*var(--unit)) calc(21*var(--unit)) var(--colorTwo),
+                calc(15*var(--unit)) calc(21*var(--unit)) var(--colorOne),
+                calc(16*var(--unit)) calc(21*var(--unit)) var(--colorTwo),
+                calc(17*var(--unit)) calc(21*var(--unit)) var(--colorOne),
+
+                0 calc(22*var(--unit)) var(--colorOne),
+                calc(1*var(--unit)) calc(22*var(--unit)) var(--colorTwo),
+                calc(2*var(--unit)) calc(22*var(--unit)) var(--colorOne),
+                calc(3*var(--unit)) calc(22*var(--unit)) var(--colorTwo),
+                calc(4*var(--unit)) calc(22*var(--unit)) var(--colorOne),
+                calc(5*var(--unit)) calc(22*var(--unit)) var(--colorTwo),
+                calc(6*var(--unit)) calc(22*var(--unit)) var(--colorOne),
+                calc(7*var(--unit)) calc(22*var(--unit)) var(--colorTwo),
+                calc(8*var(--unit)) calc(22*var(--unit)) var(--colorOne),
+                calc(9*var(--unit)) calc(22*var(--unit)) var(--colorTwo),
+                calc(10*var(--unit)) calc(22*var(--unit)) var(--colorOne),
+                calc(11*var(--unit)) calc(22*var(--unit)) var(--colorTwo),
+                calc(12*var(--unit)) calc(22*var(--unit)) var(--colorOne),
+                calc(13*var(--unit)) calc(22*var(--unit)) var(--colorTwo),
+                calc(14*var(--unit)) calc(22*var(--unit)) var(--colorOne),
+                calc(15*var(--unit)) calc(22*var(--unit)) var(--colorTwo),
+                calc(16*var(--unit)) calc(22*var(--unit)) var(--colorOne),
+                calc(17*var(--unit)) calc(22*var(--unit)) var(--colorTwo),
+
+                0 calc(23*var(--unit)) var(--colorTwo),
+                calc(1*var(--unit)) calc(23*var(--unit)) var(--colorOne),
+                calc(2*var(--unit)) calc(23*var(--unit)) var(--colorTwo),
+                calc(3*var(--unit)) calc(23*var(--unit)) var(--colorOne),
+                calc(4*var(--unit)) calc(23*var(--unit)) var(--colorTwo),
+                calc(5*var(--unit)) calc(23*var(--unit)) var(--colorOne),
+                calc(6*var(--unit)) calc(23*var(--unit)) var(--colorTwo),
+                calc(7*var(--unit)) calc(23*var(--unit)) var(--colorOne),
+                calc(8*var(--unit)) calc(23*var(--unit)) var(--colorTwo),
+                calc(9*var(--unit)) calc(23*var(--unit)) var(--colorOne),
+                calc(10*var(--unit)) calc(23*var(--unit)) var(--colorTwo),
+                calc(11*var(--unit)) calc(23*var(--unit)) var(--colorOne),
+                calc(12*var(--unit)) calc(23*var(--unit)) var(--colorTwo),
+                calc(13*var(--unit)) calc(23*var(--unit)) var(--colorOne),
+                calc(14*var(--unit)) calc(23*var(--unit)) var(--colorTwo),
+                calc(15*var(--unit)) calc(23*var(--unit)) var(--colorOne),
+                calc(16*var(--unit)) calc(23*var(--unit)) var(--colorTwo),
+                calc(17*var(--unit)) calc(23*var(--unit)) var(--colorOne),
+
+                0 calc(24*var(--unit)) var(--colorOne),
+                calc(1*var(--unit)) calc(24*var(--unit)) var(--colorTwo),
+                calc(2*var(--unit)) calc(24*var(--unit)) var(--colorOne),
+                calc(3*var(--unit)) calc(24*var(--unit)) var(--colorTwo),
+                calc(4*var(--unit)) calc(24*var(--unit)) var(--colorOne),
+                calc(5*var(--unit)) calc(24*var(--unit)) var(--colorTwo),
+                calc(6*var(--unit)) calc(24*var(--unit)) var(--colorOne),
+                calc(7*var(--unit)) calc(24*var(--unit)) var(--colorTwo),
+                calc(8*var(--unit)) calc(24*var(--unit)) var(--colorOne),
+                calc(9*var(--unit)) calc(24*var(--unit)) var(--colorTwo),
+                calc(10*var(--unit)) calc(24*var(--unit)) var(--colorOne),
+                calc(11*var(--unit)) calc(24*var(--unit)) var(--colorTwo),
+                calc(12*var(--unit)) calc(24*var(--unit)) var(--colorOne),
+                calc(13*var(--unit)) calc(24*var(--unit)) var(--colorTwo),
+                calc(14*var(--unit)) calc(24*var(--unit)) var(--colorOne),
+                calc(15*var(--unit)) calc(24*var(--unit)) var(--colorTwo),
+                calc(16*var(--unit)) calc(24*var(--unit)) var(--colorOne),
+                calc(17*var(--unit)) calc(24*var(--unit)) var(--colorTwo),
+
+                0 calc(25*var(--unit)) var(--colorTwo),
+                calc(1*var(--unit)) calc(25*var(--unit)) var(--colorOne),
+                calc(2*var(--unit)) calc(25*var(--unit)) var(--colorTwo),
+                calc(3*var(--unit)) calc(25*var(--unit)) var(--colorOne),
+                calc(4*var(--unit)) calc(25*var(--unit)) var(--colorTwo),
+                calc(5*var(--unit)) calc(25*var(--unit)) var(--colorOne),
+                calc(6*var(--unit)) calc(25*var(--unit)) var(--colorTwo),
+                calc(7*var(--unit)) calc(25*var(--unit)) var(--colorOne),
+                calc(8*var(--unit)) calc(25*var(--unit)) var(--colorTwo),
+                calc(9*var(--unit)) calc(25*var(--unit)) var(--colorOne),
+                calc(10*var(--unit)) calc(25*var(--unit)) var(--colorTwo),
+                calc(11*var(--unit)) calc(25*var(--unit)) var(--colorOne),
+                calc(12*var(--unit)) calc(25*var(--unit)) var(--colorTwo),
+                calc(13*var(--unit)) calc(25*var(--unit)) var(--colorOne),
+                calc(14*var(--unit)) calc(25*var(--unit)) var(--colorTwo),
+                calc(15*var(--unit)) calc(25*var(--unit)) var(--colorOne),
+                calc(16*var(--unit)) calc(25*var(--unit)) var(--colorTwo),
+                calc(17*var(--unit)) calc(25*var(--unit)) var(--colorOne),
+
+                0 calc(26*var(--unit)) var(--colorOne),
+                calc(1*var(--unit)) calc(26*var(--unit)) var(--colorTwo),
+                calc(2*var(--unit)) calc(26*var(--unit)) var(--colorOne),
+                calc(3*var(--unit)) calc(26*var(--unit)) var(--colorTwo),
+                calc(4*var(--unit)) calc(26*var(--unit)) var(--colorOne),
+                calc(5*var(--unit)) calc(26*var(--unit)) var(--colorTwo),
+                calc(6*var(--unit)) calc(26*var(--unit)) var(--colorOne),
+                calc(7*var(--unit)) calc(26*var(--unit)) var(--colorTwo),
+                calc(8*var(--unit)) calc(26*var(--unit)) var(--colorOne),
+                calc(9*var(--unit)) calc(26*var(--unit)) var(--colorTwo),
+                calc(10*var(--unit)) calc(26*var(--unit)) var(--colorOne),
+                calc(11*var(--unit)) calc(26*var(--unit)) var(--colorTwo),
+                calc(12*var(--unit)) calc(26*var(--unit)) var(--colorOne),
+                calc(13*var(--unit)) calc(26*var(--unit)) var(--colorTwo),
+                calc(14*var(--unit)) calc(26*var(--unit)) var(--colorOne),
+                calc(15*var(--unit)) calc(26*var(--unit)) var(--colorTwo),
+                calc(16*var(--unit)) calc(26*var(--unit)) var(--colorOne),
+                calc(17*var(--unit)) calc(26*var(--unit)) var(--colorTwo),
+
+                0 calc(27*var(--unit)) var(--colorTwo),
+                calc(1*var(--unit)) calc(27*var(--unit)) var(--colorOne),
+                calc(2*var(--unit)) calc(27*var(--unit)) var(--colorTwo),
+                calc(3*var(--unit)) calc(27*var(--unit)) var(--colorOne),
+                calc(4*var(--unit)) calc(27*var(--unit)) var(--colorTwo),
+                calc(5*var(--unit)) calc(27*var(--unit)) var(--colorOne),
+                calc(6*var(--unit)) calc(27*var(--unit)) var(--colorTwo),
+                calc(7*var(--unit)) calc(27*var(--unit)) var(--colorOne),
+                calc(8*var(--unit)) calc(27*var(--unit)) var(--colorTwo),
+                calc(9*var(--unit)) calc(27*var(--unit)) var(--colorOne),
+                calc(10*var(--unit)) calc(27*var(--unit)) var(--colorTwo),
+                calc(11*var(--unit)) calc(27*var(--unit)) var(--colorOne),
+                calc(12*var(--unit)) calc(27*var(--unit)) var(--colorTwo),
+                calc(13*var(--unit)) calc(27*var(--unit)) var(--colorOne),
+                calc(14*var(--unit)) calc(27*var(--unit)) var(--colorTwo),
+                calc(15*var(--unit)) calc(27*var(--unit)) var(--colorOne),
+                calc(16*var(--unit)) calc(27*var(--unit)) var(--colorTwo),
+                calc(17*var(--unit)) calc(27*var(--unit)) var(--colorOne),
+
+                0 calc(28*var(--unit)) var(--colorOne),
+                calc(1*var(--unit)) calc(28*var(--unit)) var(--colorTwo),
+                calc(2*var(--unit)) calc(28*var(--unit)) var(--colorOne),
+                calc(3*var(--unit)) calc(28*var(--unit)) var(--colorTwo),
+                calc(4*var(--unit)) calc(28*var(--unit)) var(--colorOne),
+                calc(5*var(--unit)) calc(28*var(--unit)) var(--colorTwo),
+                calc(6*var(--unit)) calc(28*var(--unit)) var(--colorOne),
+                calc(7*var(--unit)) calc(28*var(--unit)) var(--colorTwo),
+                calc(8*var(--unit)) calc(28*var(--unit)) var(--colorOne),
+                calc(9*var(--unit)) calc(28*var(--unit)) var(--colorTwo),
+                calc(10*var(--unit)) calc(28*var(--unit)) var(--colorOne),
+                calc(11*var(--unit)) calc(28*var(--unit)) var(--colorTwo),
+                calc(12*var(--unit)) calc(28*var(--unit)) var(--colorOne),
+                calc(13*var(--unit)) calc(28*var(--unit)) var(--colorTwo),
+                calc(14*var(--unit)) calc(28*var(--unit)) var(--colorOne),
+                calc(15*var(--unit)) calc(28*var(--unit)) var(--colorTwo),
+                calc(16*var(--unit)) calc(28*var(--unit)) var(--colorOne),
+                calc(17*var(--unit)) calc(28*var(--unit)) var(--colorTwo),
+
+                0 calc(29*var(--unit)) var(--colorTwo),
+                calc(1*var(--unit)) calc(29*var(--unit)) var(--colorOne),
+                calc(2*var(--unit)) calc(29*var(--unit)) var(--colorTwo),
+                calc(3*var(--unit)) calc(29*var(--unit)) var(--colorOne),
+                calc(4*var(--unit)) calc(29*var(--unit)) var(--colorTwo),
+                calc(5*var(--unit)) calc(29*var(--unit)) var(--colorOne),
+                calc(6*var(--unit)) calc(29*var(--unit)) var(--colorTwo),
+                calc(7*var(--unit)) calc(29*var(--unit)) var(--colorOne),
+                calc(8*var(--unit)) calc(29*var(--unit)) var(--colorTwo),
+                calc(9*var(--unit)) calc(29*var(--unit)) var(--colorOne),
+                calc(10*var(--unit)) calc(29*var(--unit)) var(--colorTwo),
+                calc(11*var(--unit)) calc(29*var(--unit)) var(--colorOne),
+                calc(12*var(--unit)) calc(29*var(--unit)) var(--colorTwo),
+                calc(13*var(--unit)) calc(29*var(--unit)) var(--colorOne),
+                calc(14*var(--unit)) calc(29*var(--unit)) var(--colorTwo),
+                calc(15*var(--unit)) calc(29*var(--unit)) var(--colorOne),
+                calc(16*var(--unit)) calc(29*var(--unit)) var(--colorTwo),
+                calc(17*var(--unit)) calc(29*var(--unit)) var(--colorOne),
+
+                0 calc(30*var(--unit)) var(--colorOne),
+                calc(1*var(--unit)) calc(30*var(--unit)) var(--colorTwo),
+                calc(2*var(--unit)) calc(30*var(--unit)) var(--colorOne),
+                calc(3*var(--unit)) calc(30*var(--unit)) var(--colorTwo),
+                calc(4*var(--unit)) calc(30*var(--unit)) var(--colorOne),
+                calc(5*var(--unit)) calc(30*var(--unit)) var(--colorTwo),
+                calc(6*var(--unit)) calc(30*var(--unit)) var(--colorOne),
+                calc(7*var(--unit)) calc(30*var(--unit)) var(--colorTwo),
+                calc(8*var(--unit)) calc(30*var(--unit)) var(--colorOne),
+                calc(9*var(--unit)) calc(30*var(--unit)) var(--colorTwo),
+                calc(10*var(--unit)) calc(30*var(--unit)) var(--colorOne),
+                calc(11*var(--unit)) calc(30*var(--unit)) var(--colorTwo),
+                calc(12*var(--unit)) calc(30*var(--unit)) var(--colorOne),
+                calc(13*var(--unit)) calc(30*var(--unit)) var(--colorTwo),
+                calc(14*var(--unit)) calc(30*var(--unit)) var(--colorOne),
+                calc(15*var(--unit)) calc(30*var(--unit)) var(--colorTwo),
+                calc(16*var(--unit)) calc(30*var(--unit)) var(--colorOne),
+                calc(17*var(--unit)) calc(30*var(--unit)) var(--colorTwo),
+
+                0 calc(31*var(--unit)) var(--colorTwo),
+                calc(1*var(--unit)) calc(31*var(--unit)) var(--colorOne),
+                calc(2*var(--unit)) calc(31*var(--unit)) var(--colorTwo),
+                calc(3*var(--unit)) calc(31*var(--unit)) var(--colorOne),
+                calc(4*var(--unit)) calc(31*var(--unit)) var(--colorTwo),
+                calc(5*var(--unit)) calc(31*var(--unit)) var(--colorOne),
+                calc(6*var(--unit)) calc(31*var(--unit)) var(--colorTwo),
+                calc(7*var(--unit)) calc(31*var(--unit)) var(--colorOne),
+                calc(8*var(--unit)) calc(31*var(--unit)) var(--colorTwo),
+                calc(9*var(--unit)) calc(31*var(--unit)) var(--colorOne),
+                calc(10*var(--unit)) calc(31*var(--unit)) var(--colorTwo),
+                calc(11*var(--unit)) calc(31*var(--unit)) var(--colorOne),
+                calc(12*var(--unit)) calc(31*var(--unit)) var(--colorTwo),
+                calc(13*var(--unit)) calc(31*var(--unit)) var(--colorOne),
+                calc(14*var(--unit)) calc(31*var(--unit)) var(--colorTwo),
+                calc(15*var(--unit)) calc(31*var(--unit)) var(--colorOne),
+                calc(16*var(--unit)) calc(31*var(--unit)) var(--colorTwo),
+                calc(17*var(--unit)) calc(31*var(--unit)) var(--colorOne)
+        }
+
+        @media (max-width: 560px) {
+            div.cards {
+                transform: scale(.9);
+            }
+        }
+    </style>
+
+<body>
+    <div class="wrap">
+        <div class="cardsBox">
+            <div class="cards" data-key="cardOne">
+                <p class="pixel"></p>
+            </div>
+            <div class="cards" data-key="cardTwo">
+                <p class="pixel"></p>
+            </div>
+            <div class="cards" data-key="cardThree">
+                <p class="pixel"></p>
+            </div>
+        </div>
+        <div class='btn'>reset</div>
+        <div class='result'>
+            <div class="currentResult"><span>current points</span></div>
+            <div class="totalResult">Total points: <span></span></div>
+        </div>
+    </div>
+    <script src='main.js'></script>
+</body>
